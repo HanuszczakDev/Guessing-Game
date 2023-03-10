@@ -1,9 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-pro
 // jects/modules.
 buildscript {
-    ext.nav_version = "2.5.3"
+    ext {
+        kotlin_version = '1.8.0'
+        nav_version = '2.5.3'
+    }
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+    repositories {
+        mavenCentral()
     }
 }
 
