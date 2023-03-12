@@ -36,13 +36,15 @@ class GameFragment : Fragment() {
                 binding.word.text = newValue
         }
 
-        binding.guessButton.setOnClickListener {
-            viewModel.makeGuess(binding.guess.text.toString().uppercase())
-            binding.guess.text = null
-            if (viewModel.isWon() || viewModel.isLost()) {
+        viewModel.gameOver.observe(viewLifecycleOwner) { newValue ->
+            if (newValue) {
                 val action = GameFragmentDirections.actionGameFragmentToResultFragment(viewModel.wonLostMessage())
                 view.findNavController().navigate(action)
             }
+        }
+        binding.guessButton.setOnClickListener {
+            viewModel.makeGuess(binding.guess.text.toString().uppercase())
+            binding.guess.text = null
         }
         return view
     }
