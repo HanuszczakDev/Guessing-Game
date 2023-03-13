@@ -24,17 +24,8 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        viewModel.incorrectGuesses.observe(viewLifecycleOwner) { newValue ->
-            binding.incorrectGuesses.text = "Incorrect guesses: $newValue"
-        }
-
-        viewModel.livesLeft.observe(viewLifecycleOwner) { newValue ->
-            binding.lives.text = "You have $newValue lives left"
-        }
-
-        viewModel.secretWordDisplay.observe(viewLifecycleOwner) { newValue ->
-                binding.word.text = newValue
-        }
+        binding.gameViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.gameOver.observe(viewLifecycleOwner) { newValue ->
             if (newValue) {
