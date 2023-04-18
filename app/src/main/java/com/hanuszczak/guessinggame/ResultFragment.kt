@@ -14,6 +14,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
@@ -33,7 +35,7 @@ class ResultFragment : Fragment() {
             composeView.setContent {
                 MaterialTheme {
                     Surface {
-                        ResultFragmentContent()
+                        view?.let { ResultFragmentContent(it, viewModel) }
                     }
                 }
             }
@@ -53,15 +55,25 @@ class ResultFragment : Fragment() {
     }
 
     @Composable
-    private fun ResultFragmentContent(view: View) {
+    private fun ResultFragmentContent(view: View, viewModel: ResultViewModel) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            ResultText(result = viewModel.result)
             NewGameButton {
                 view.findNavController().navigate(R.id.action_resultFragment_to_gameFragment)
             }
         }
+    }
+
+    @Composable
+    fun ResultText(result: String) {
+        Text(
+            text = result,
+            fontSize = 12.sp,
+            textAlign = TextAlign.Center
+        )
     }
 
     @Composable
