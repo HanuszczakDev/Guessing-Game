@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
@@ -23,7 +26,11 @@ class ResultFragment : Fragment() {
     ): View {
         _binding = FragmentResultBinding.inflate(inflater, container, false).apply { 
             composeView.setContent {
-                Text(text = "this is composable!")
+                MaterialTheme {
+                    Surface {
+                        ResultFragmentContent()
+                    }
+                }
             }
         }
         val view = binding.root
@@ -38,6 +45,11 @@ class ResultFragment : Fragment() {
             view.findNavController().navigate(R.id.action_resultFragment_to_gameFragment)
         }
         return view
+    }
+
+    @Composable
+    private fun ResultFragmentContent() {
+        TODO("Not yet implemented")
     }
 
     override fun onDestroyView() {
