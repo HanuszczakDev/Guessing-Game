@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
@@ -48,8 +53,22 @@ class ResultFragment : Fragment() {
     }
 
     @Composable
-    private fun ResultFragmentContent() {
-        TODO("Not yet implemented")
+    private fun ResultFragmentContent(view: View) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            NewGameButton {
+                view.findNavController().navigate(R.id.action_resultFragment_to_gameFragment)
+            }
+        }
+    }
+
+    @Composable
+    fun NewGameButton(clicked: () -> Unit) {
+        Button(onClick = clicked) {
+            Text(text = "Start New Game")
+        }
     }
 
     override fun onDestroyView() {
