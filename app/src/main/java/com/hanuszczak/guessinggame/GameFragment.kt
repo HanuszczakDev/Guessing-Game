@@ -64,6 +64,7 @@ class GameFragment : Fragment() {
             mutableStateOf("")
         }
         Column(modifier = Modifier.fillMaxWidth()) {
+            LivesLeftText(viewModel = viewModel)
             IncorrectGuessesText(viewModel = viewModel)
             EnterGuess(guess = guess.value) { guess.value = it }
             Column(
@@ -78,6 +79,14 @@ class GameFragment : Fragment() {
                     viewModel.finishGame()
                 }
             }
+        }
+    }
+
+    @Composable
+    fun LivesLeftText(viewModel: GameViewModel) {
+        val livesLeft = viewModel.livesLeft.observeAsState()
+        livesLeft.value?.let {
+            Text(text = stringResource(id = R.string.lives_left, it))
         }
     }
 
