@@ -67,6 +67,10 @@ class GameFragment : Fragment() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                GuessButton {
+                    viewModel.makeGuess(guess.value.uppercase())
+                    guess.value = ""
+                }
                 FinishGameButton {
                     viewModel.finishGame()
                 }
@@ -74,6 +78,13 @@ class GameFragment : Fragment() {
         }
     }
 
+    @Composable
+    fun GuessButton(clicked: () -> Unit) {
+        Button(onClick = clicked) {
+            Text(text = "Guess!")
+        }
+    }
+    
     @Composable
     fun EnterGuess(guess: String, changed: (String) -> Unit) {
         TextField(
