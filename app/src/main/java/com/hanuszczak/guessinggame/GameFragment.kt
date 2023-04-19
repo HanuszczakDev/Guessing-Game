@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.hanuszczak.guessinggame.databinding.FragmentGameBinding
@@ -51,7 +50,8 @@ class GameFragment : Fragment() {
 
         viewModel.gameOver.observe(viewLifecycleOwner) { newValue ->
             if (newValue) {
-                val action = GameFragmentDirections.actionGameFragmentToResultFragment(viewModel.wonLostMessage())
+                val action =
+                    GameFragmentDirections.actionGameFragmentToResultFragment(viewModel.wonLostMessage())
                 view.findNavController().navigate(action)
             }
         }
@@ -69,8 +69,9 @@ class GameFragment : Fragment() {
         }
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
-                modifier = Modifier.fillMaxWidth(), 
-                horizontalArrangement = Arrangement.Center) {
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
                 SecretWordDisplay(viewModel = viewModel)
             }
             LivesLeftText(viewModel = viewModel)
