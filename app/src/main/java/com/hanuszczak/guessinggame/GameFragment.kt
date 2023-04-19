@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -26,7 +32,7 @@ class GameFragment : Fragment() {
             composeView.setContent {
                 MaterialTheme {
                     Surface {
-                        GameFragmentContent()
+                        GameFragmentContent(viewModel)
                     }
                 }
             }
@@ -50,10 +56,23 @@ class GameFragment : Fragment() {
         }
         return view
     }
+    @Composable
+    private fun GameFragmentContent(viewModel: GameViewModel) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            FinishGameButton {
+                viewModel.finishGame()
+            }
+        }
+    }
 
     @Composable
-    private fun GameFragmentContent() {
-        TODO("Not yet implemented")
+    fun FinishGameButton(clicked: () -> Unit) {
+        Button(onClick = clicked) {
+            Text(text = "Finish Game")
+        }
     }
 
     override fun onDestroyView() {
